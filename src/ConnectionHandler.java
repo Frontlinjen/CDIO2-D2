@@ -53,6 +53,10 @@ public class ConnectionHandler {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+	}
+	public void close() throws IOException
+	{
+		instream.close();
+		outstream.close();
 	}
 }
