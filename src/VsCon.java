@@ -70,7 +70,7 @@ public class VsCon {
 				}
 				case "Q":
 				{
-					break;
+					disconnect();
 				}
 				}
 				System.out.println(String.join(",", tokens));
