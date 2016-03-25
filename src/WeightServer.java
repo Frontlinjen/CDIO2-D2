@@ -123,8 +123,6 @@ public class WeightServer {
 		
 	}
 	public void printmenu(){
-		if(true)
-			return;
 		for (int i=0;i<2;i++)
 		System.out.println("                                                 ");
 		System.out.println("*************************************************");
