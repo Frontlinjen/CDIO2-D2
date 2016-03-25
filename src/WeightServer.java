@@ -6,7 +6,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class WeightServer {
-	String inline;
 	String indtDisp= "";
 	WeightData data = new WeightData();
 	ConnectionHandler connection;
@@ -44,7 +43,9 @@ public class WeightServer {
 				}
 				case "D": //Udskriv til display
 				{
-					indtDisp=(inline.substring(2, inline.length()));
+					for(int i = 1; i < tokens.length; i++){
+						indtDisp += " " + tokens[i];
+					}
 					printmenu();
 					connection.SendMessage("DB"+"\r\n");
 					break;
@@ -69,7 +70,6 @@ public class WeightServer {
 				}
 				case "B": //Set bruttovægt
 				{
-					String temp= inline.substring(2,inline.length());
 					data.setBrutto(Double.parseDouble(tokens[2]));
 					printmenu();
 					connection.SendMessage("DB"+"\r\n");
@@ -133,9 +133,8 @@ public class WeightServer {
 		System.out.println("*************************************************");
 		System.out.println("                                                 ");
 		System.out.println("                                                 ");
-		System.out.println("Debug info:                                      ");
-		System.out.println("Brutto: " + (data.getBrutto())+ " kg"                       );
-		System.out.println("Streng modtaget: "+inline)                         ;
+		System.out.println("Brutto: " + (data.getBrutto())+ " kg"             );
+		System.out.println("Tara: " + (data.getTara())+ " kg"              	);
 		System.out.println("                                                 ");
 		System.out.println("Denne vægt simulator lytter på ordrene           ");
 		System.out.println("S, T, D 'TEST', DW, RM20 8 .... , B og Q         ");
