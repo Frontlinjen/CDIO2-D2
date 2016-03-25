@@ -13,6 +13,7 @@ public class VsCon {
 	static int portdst = 8000;
 	static ConnectionHandler connection;
 	static boolean rm20flag = false;
+	
 	private static void connect(int port) throws IOException
 	{
 		connection = new ConnectionHandler(port);
@@ -21,6 +22,7 @@ public class VsCon {
 		System.out.println("paa kommando linien for andet portnr");
 		
 	}
+	
 	private static void disconnect()
 	{
 		System.out.println("");
@@ -36,6 +38,7 @@ public class VsCon {
 		}
 		
 	}
+	
 	public static void main(String[] args) throws IOException{
 		connect(portdst);
 		printmenu();
