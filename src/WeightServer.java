@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class WeightServer {
 	String indtDisp= "";
+	String indtSecDisp = "";
 	WeightData data = new WeightData();
 	ConnectionHandler connection;
 	static final int defaultPort = 8000;
@@ -39,7 +42,30 @@ public class WeightServer {
 				{
 				case "RM20": //Skriv i display, afvent indtastning
 				{
-					
+					switch(tokens[1]){
+						case "8": 
+							String command = "";
+							for(int i = 2; i < tokens.length; i++){
+								command += " " + tokens[i];
+							}
+							StringTokenizer tokenizer = new StringTokenizer(command, "\"");
+							String message = tokenizer.nextToken();
+							//Skip unnecessary input
+							tokenizer.nextToken();
+							String length = tokenizer.nextToken();
+							length = length.substring(1);
+							int max = Integer.parseInt(length);
+							System.out.println(message.substring(0, 29));
+							connection.SendMessage("RM20 B \r\n");
+							Scanner sc = new Scanner(System.in);
+							String input = sc.nextLine();
+							connection.SendMessage("RM20 A " + input.substring(0, max-1) + "\r\n");
+							sc.close();
+							
+							
+							
+							break;
+					}
 					break;
 				}
 				case "D": //Udskriv til display
@@ -47,7 +73,7 @@ public class WeightServer {
 					for(int i = 1; i < tokens.length; i++){
 						indtDisp += " " + tokens[i];
 					}
-					indtDisp.substring(0, 6);
+					indtDisp = indtDisp.substring(0, 6);
 					printmenu();
 					connection.SendMessage("D A"+"\r\n");
 					break;
@@ -86,9 +112,10 @@ public class WeightServer {
 				case "P111": //Udskriv til sekundært display
 				{
 					for(int i = 1; i < tokens.length; i++){
-						indtDisp += " " + tokens[i];
+						indtSecDisp += " " + tokens[i];
 					}
-					indtDisp.substring(0, 29);
+					
+					indtSecDisp = indtSecDisp.substring(0, 29);
 					printmenu();
 					connection.SendMessage("D A"+"\r\n");
 					break;
@@ -142,6 +169,7 @@ public class WeightServer {
 		System.out.println("*************************************************");
 		System.out.println("Netto: " + (data.getNetto())+ " kg"                   );
 		System.out.println("Instruktionsdisplay: " +  indtDisp    );
+		System.out.println("Sekundært instruktionsdisplay: " +  indtSecDisp    );
 		System.out.println("*************************************************");
 		System.out.println("                                                 ");
 		System.out.println("                                                 ");
