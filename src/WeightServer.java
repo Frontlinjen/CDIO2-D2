@@ -37,8 +37,9 @@ public class WeightServer {
 			while ((tokens = connection.getCommand())!=null){ //her ventes på input
 				switch(tokens[0])
 				{
-				case "RM": //Skriv i display, afvent indtastning
+				case "RM20": //Skriv i display, afvent indtastning
 				{
+					
 					break;
 				}
 				case "D": //Udskriv til display
@@ -46,13 +47,15 @@ public class WeightServer {
 					for(int i = 1; i < tokens.length; i++){
 						indtDisp += " " + tokens[i];
 					}
+					indtDisp.substring(0, 6);
 					printmenu();
-					connection.SendMessage("DB"+"\r\n");
+					connection.SendMessage("D A"+"\r\n");
 					break;
 				}
 				case "DW": //Reset Display
 				{
-					indtDisp=null;
+					indtDisp=data.getNetto()+ "kg";
+					connection.SendMessage("DW A\r\n");
 					break;
 				}
 				case "T": //Tarer vægten
@@ -78,6 +81,17 @@ public class WeightServer {
 				case "Q": //Aflsut program
 				{
 					disconnect();
+				}
+				
+				case "P111": //Udskriv til sekundært display
+				{
+					for(int i = 1; i < tokens.length; i++){
+						indtDisp += " " + tokens[i];
+					}
+					indtDisp.substring(0, 29);
+					printmenu();
+					connection.SendMessage("D A"+"\r\n");
+					break;
 				}
 			}
 				System.out.println(String.join(",", tokens));
