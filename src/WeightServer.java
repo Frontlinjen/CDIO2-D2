@@ -30,6 +30,7 @@ public class WeightServer {
 	{
 		try {
 			connect(port);
+			System.out.println("Successfully connected");
 		} catch (IOException e1) {
 			System.out.println("Error: A problem occurred while waiting for a connection on port: " + port);
 			e1.printStackTrace();
@@ -49,8 +50,11 @@ public class WeightServer {
 								command += " " + tokens[i];
 							}
 							StringTokenizer tokenizer = new StringTokenizer(command, "\"");
+							tokenizer.nextToken();
 							String message = tokenizer.nextToken();
 							//Skip unnecessary input
+							tokenizer.nextToken();
+							tokenizer.nextToken();
 							tokenizer.nextToken();
 							String length = tokenizer.nextToken();
 							length = length.substring(1);
@@ -70,10 +74,12 @@ public class WeightServer {
 				}
 				case "D": //Udskriv til display
 				{
+					indtDisp = "";
 					for(int i = 1; i < tokens.length; i++){
 						indtDisp += " " + tokens[i];
 					}
-					indtDisp = indtDisp.substring(0, 6);
+					if(indtSecDisp.length() > 6)
+						indtDisp = indtDisp.substring(0, 6);
 					printmenu();
 					connection.SendMessage("D A"+"\r\n");
 					break;
@@ -99,7 +105,7 @@ public class WeightServer {
 				}
 				case "B": //Set bruttovægt
 				{
-					data.setBrutto(Double.parseDouble(tokens[2]));
+					data.setBrutto(Double.parseDouble(tokens[1]));
 					printmenu();
 					connection.SendMessage("DB"+"\r\n");
 					break;
@@ -111,11 +117,12 @@ public class WeightServer {
 				
 				case "P111": //Udskriv til sekundært display
 				{
+					indtSecDisp = "";
 					for(int i = 1; i < tokens.length; i++){
 						indtSecDisp += " " + tokens[i];
 					}
-					
-					indtSecDisp = indtSecDisp.substring(0, 29);
+					if(indtSecDisp.length() > 29)
+						indtSecDisp = indtSecDisp.substring(0, 29);
 					printmenu();
 					connection.SendMessage("D A"+"\r\n");
 					break;
