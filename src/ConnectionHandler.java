@@ -54,6 +54,15 @@ public class ConnectionHandler {
 			e.printStackTrace();
 		}
 	}
+	public void SendMessage(String s)
+	{
+		try {
+			outstream.writeBytes(s);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public void close() throws IOException
 	{
 		instream.close();
