@@ -8,6 +8,7 @@ import java.net.Socket;
 public class WeightServer {
 	String inline;
 	String indtDisp= "";
+	WeightData data = new WeightData();
 	ConnectionHandler connection;
 	static final int defaultPort = 8000;
 	static boolean rm20flag = false;
