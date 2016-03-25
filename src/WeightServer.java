@@ -41,7 +41,7 @@ public class WeightServer {
 				{
 					indtDisp=(inline.substring(2, inline.length()));
 					printmenu();
-					outstream.writeBytes("DB"+"\r\n");
+					connection.SendMessage("DB"+"\r\n");
 					break;
 				}
 				case "DW": //Reset Display
@@ -51,7 +51,7 @@ public class WeightServer {
 				}
 				case "T": //Tarer vægten
 				{
-					outstream.writeBytes("T S " + (tara) + " kg "+"\r\n");
+					connection.SendMessage("T S " + (tara) + " kg "+"\r\n");
 					tara=brutto;
 					printmenu();
 					break;
@@ -59,7 +59,7 @@ public class WeightServer {
 				case "S": //Afvej
 				{
 					printmenu();
-					outstream.writeBytes("S S " + (brutto-tara)+ " kg "  +"\r\n");
+					connection.SendMessage("S S " + (brutto-tara)+ " kg "  +"\r\n");
 					break;
 				}
 				case "B": //Set bruttovægt
@@ -67,7 +67,7 @@ public class WeightServer {
 					String temp= inline.substring(2,inline.length());
 					brutto = Double.parseDouble(temp);
 					printmenu();
-					outstream.writeBytes("DB"+"\r\n");
+					connection.SendMessage("DB"+"\r\n");
 					break;
 				}
 				case "Q": //Aflsut program
