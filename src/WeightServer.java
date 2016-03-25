@@ -26,7 +26,12 @@ public class WeightServer {
 	}
 	public void start(int port)
 	{
-		connect(port);
+		try {
+			connect(port);
+		} catch (IOException e1) {
+			System.out.println("Error: A problem occurred while waiting for a connection on port: " + port);
+			e1.printStackTrace();
+		}
 		printmenu();
 		try{
 			String[] tokens = null;
@@ -51,21 +56,21 @@ public class WeightServer {
 				}
 				case "T": //Tarer vægten
 				{
-					connection.SendMessage("T S " + (tara) + " kg "+"\r\n");
-					tara=brutto;
+					data.setTara(data.getBrutto());
+					connection.SendMessage("T S " + (data.getTara()) + " kg "+"\r\n");
 					printmenu();
 					break;
 				}
 				case "S": //Afvej
 				{
 					printmenu();
-					connection.SendMessage("S S " + (brutto-tara)+ " kg "  +"\r\n");
+					connection.SendMessage("S S " + (data.getNetto())+ " kg "  +"\r\n");
 					break;
 				}
 				case "B": //Set bruttovægt
 				{
 					String temp= inline.substring(2,inline.length());
-					brutto = Double.parseDouble(temp);
+					data.setBrutto(Double.parseDouble(tokens[2]));
 					printmenu();
 					connection.SendMessage("DB"+"\r\n");
 					break;
@@ -123,13 +128,13 @@ public class WeightServer {
 		for (int i=0;i<2;i++)
 		System.out.println("                                                 ");
 		System.out.println("*************************************************");
-		System.out.println("Netto: " + (brutto-tara)+ " kg"                   );
+		System.out.println("Netto: " + (data.getNetto())+ " kg"                   );
 		System.out.println("Instruktionsdisplay: " +  indtDisp    );
 		System.out.println("*************************************************");
 		System.out.println("                                                 ");
 		System.out.println("                                                 ");
 		System.out.println("Debug info:                                      ");
-		System.out.println("Brutto: " + (brutto)+ " kg"                       );
+		System.out.println("Brutto: " + (data.getBrutto())+ " kg"                       );
 		System.out.println("Streng modtaget: "+inline)                         ;
 		System.out.println("                                                 ");
 		System.out.println("Denne vægt simulator lytter på ordrene           ");
