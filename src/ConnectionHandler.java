@@ -37,6 +37,7 @@ public class ConnectionHandler {
 				return tokens;
 			}
 		} catch (IOException e) {
+			System.out.println("Error: A problem occurred when recieving command");
 			e.printStackTrace();
 		}
 		return null;
@@ -51,6 +52,7 @@ public class ConnectionHandler {
 			
 			System.out.println("Skipping...");
 		} catch (IOException e) {
+			System.out.println("Error: A problem occurred when connecting to server");
 			e.printStackTrace();
 		}
 	}
@@ -59,7 +61,7 @@ public class ConnectionHandler {
 		try {
 			outstream.writeBytes(s);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Error: A problem occurred when printing to display");
 			e.printStackTrace();
 		}
 	}
