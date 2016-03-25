@@ -44,35 +44,48 @@ public class VsCon {
 			while ((tokens = connection.getCommand())!=null){ //her ventes på input
 				switch(tokens[0])
 				{
-				case "RM":
-				{
-					
-				}
-				case "D":
+				case "RM": //Skriv i display, afvent indtastning
 				{
 					break;
 				}
-				case "DW":
+				case "D": //Udskriv til display
 				{
+					indtDisp=(inline.substring(2, inline.length()));
+					printmenu();
+					outstream.writeBytes("DB"+"\r\n");
 					break;
 				}
-				case "T":
+				case "DW": //Reset Display
 				{
+					indtDisp=null;
 					break;
 				}
-				case "S":
+				case "T": //Tarer vægten
 				{
+					outstream.writeBytes("T S " + (tara) + " kg "+"\r\n");
+					tara=brutto;
+					printmenu();
 					break;
 				}
-				case "B":
+				case "S": //Afvej
 				{
+					printmenu();
+					outstream.writeBytes("S S " + (brutto-tara)+ " kg "  +"\r\n");
 					break;
 				}
-				case "Q":
+				case "B": //Set bruttovægt
+				{
+					String temp= inline.substring(2,inline.length());
+					brutto = Double.parseDouble(temp);
+					printmenu();
+					outstream.writeBytes("DB"+"\r\n");
+					break;
+				}
+				case "Q": //Aflsut program
 				{
 					disconnect();
 				}
-				}
+			}
 				System.out.println(String.join(",", tokens));
 //				if (inline.startsWith("RM")){                        
 //					// ikke implimenteret
