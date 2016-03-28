@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class WeightServer {
 	private String indtDisp= "";
@@ -42,21 +41,8 @@ public class WeightServer {
 				{
 					switch(tokens[1]){
 						case "8": 
-							if(tokens.length < 4){
-								throw new Exception("Not enough tokens in array to complete function");
-							}
-							String command = "";
-							for(int i = 2; i < tokens.length; i++){
-								command += " " + tokens[i];
-							}
-							StringTokenizer tokenizer = new StringTokenizer(command, "\"");
-							tokenizer.nextToken();
-							String message = tokenizer.nextToken();
-							//Skip unnecessary input
-							tokenizer.nextToken();
-							tokenizer.nextToken();
-							tokenizer.nextToken();
-							String length = tokenizer.nextToken();
+							String message = tokens[2];
+							String length = tokens[4];
 							length = length.substring(1);
 							int max = 0;
 							try{

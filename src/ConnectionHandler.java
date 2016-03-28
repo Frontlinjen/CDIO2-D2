@@ -27,14 +27,8 @@ public class ConnectionHandler {
 					command = command.substring(21, command.length());
 					fresh = false;
 				}
-				StringTokenizer tokenizer = new StringTokenizer(command);
-				int index = 0;
-				String[] tokens = new String[tokenizer.countTokens()];
-				while(tokenizer.hasMoreTokens())
-				{
-					tokens[index++] = tokenizer.nextToken();
-				}
-				return tokens;
+				CommandParser tokenizer = new CommandParser(command);
+				return tokenizer.getTokens();
 			}
 		} catch (IOException e) {
 			System.out.println("Error: A problem occurred when recieving command");
