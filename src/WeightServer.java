@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -102,13 +104,17 @@ public class WeightServer {
 						System.out.println("Fejl, tokens b�r v�re mindst 1");
 					}
 					else{
-					data.setBrutto(Double.parseDouble(tokens[1]));
+					try{
+						data.setBrutto(Double.parseDouble(tokens[1]));
+					} catch(Exception e){
+						throw new Exception("Ingen brutto angivet");
+					}
 					printmenu();
 					connection.SendMessage("DB"+"\r\n");
 					}
 					break;
 				}
-				case "Q": //Aflsut program
+				case "Q": //Afslut program
 				{
 					disconnect();
 				}
