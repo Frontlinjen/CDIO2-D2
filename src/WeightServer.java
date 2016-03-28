@@ -3,16 +3,16 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class WeightServer {
-	String indtDisp= "";
-	String indtSecDisp = "";
-	WeightData data = new WeightData();
-	ConnectionHandler connection;
+	private String indtDisp= "";
+	private String indtSecDisp = "";
+	private WeightData data = new WeightData();
+	private ConnectionHandler connection;
 	static final int defaultPort = 8000;
 	static boolean rm20flag = false;
 	private void connect(int port) throws IOException
 	{
 		connection = new ConnectionHandler(port);
-		System.out.println("Venter paa connection på port " + port );
+		System.out.println("Venter paa connection pï¿½ port " + port );
 		System.out.println("Indtast eventuel portnummer som 1. argument");
 		System.out.println("paa kommando linien for andet portnr");
 		
@@ -33,7 +33,7 @@ public class WeightServer {
 		printmenu();
 		try{
 			String[] tokens = null;
-			while ((tokens = connection.getCommand())!=null){ //her ventes på input
+			while ((tokens = connection.getCommand())!=null){ //her ventes pï¿½ input
 				switch(tokens[0])
 				{
 				case "RM20": //Skriv i display, afvent indtastning
@@ -83,7 +83,7 @@ public class WeightServer {
 					connection.SendMessage("DW A\r\n");
 					break;
 				}
-				case "T": //Tarer vægten
+				case "T": //Tarer vï¿½gten
 				{
 					data.setTara(data.getBrutto());
 					connection.SendMessage("T S " + (data.getTara()) + " kg "+"\r\n");
@@ -96,10 +96,10 @@ public class WeightServer {
 					connection.SendMessage("S S " + (data.getNetto())+ " kg "  +"\r\n");
 					break;
 				}
-				case "B": //Set bruttovægt
+				case "B": //Set bruttovï¿½gt
 				{
 					if (tokens.length < 1){
-						System.out.println("Fejl, tokens bør være mindst 1");
+						System.out.println("Fejl, tokens bï¿½r vï¿½re mindst 1");
 					}
 					else{
 					data.setBrutto(Double.parseDouble(tokens[1]));
@@ -113,7 +113,7 @@ public class WeightServer {
 					disconnect();
 				}
 				
-				case "P111": //Udskriv til sekundært display
+				case "P111": //Udskriv til sekundï¿½rt display
 				{
 					indtSecDisp = "";
 					for(int i = 1; i < tokens.length; i++){
@@ -175,21 +175,21 @@ public class WeightServer {
 		System.out.println("*************************************************");
 		System.out.println("Netto: " + (data.getNetto())+ " kg"                   );
 		System.out.println("Instruktionsdisplay: " +  indtDisp    );
-		System.out.println("Sekundært instruktionsdisplay: " +  indtSecDisp    );
+		System.out.println("Sekundï¿½rt instruktionsdisplay: " +  indtSecDisp    );
 		System.out.println("*************************************************");
 		System.out.println("                                                 ");
 		System.out.println("                                                 ");
 		System.out.println("Brutto: " + (data.getBrutto())+ " kg"             );
 		System.out.println("Tara: " + (data.getTara())+ " kg"              	);
 		System.out.println("                                                 ");
-		System.out.println("Denne vægt simulator lytter på ordrene           ");
+		System.out.println("Denne vï¿½gt simulator lytter pï¿½ ordrene           ");
 		System.out.println("S, T, D 'TEST', DW, RM20 8 .... , B og Q         ");
-		System.out.println("på kommunikationsporten.                         ");
+		System.out.println("pï¿½ kommunikationsporten.                         ");
 		System.out.println("******")                             ;
 		System.out.println("Tast T for tara (svarende til knaptryk paa vegt)") ;
-		System.out.println("Tast B for ny brutto (svarende til at belastningen paa vegt ændres)");
+		System.out.println("Tast B for ny brutto (svarende til at belastningen paa vegt ï¿½ndres)");
 		System.out.println("Tast Q for at afslutte program program");
-		System.out.println("Indtast (T/B/Q for knaptryk / brutto ændring / quit)");
+		System.out.println("Indtast (T/B/Q for knaptryk / brutto ï¿½ndring / quit)");
 		System.out.print  ("Tast her: ");
 	}
 }
