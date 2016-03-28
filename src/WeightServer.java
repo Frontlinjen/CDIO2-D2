@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class WeightServer {
 	private String indtDisp= "";
@@ -40,18 +39,8 @@ public class WeightServer {
 				{
 					switch(tokens[1]){
 						case "8": 
-							String command = "";
-							for(int i = 2; i < tokens.length; i++){
-								command += " " + tokens[i];
-							}
-							StringTokenizer tokenizer = new StringTokenizer(command, "\"");
-							tokenizer.nextToken();
-							String message = tokenizer.nextToken();
-							//Skip unnecessary input
-							tokenizer.nextToken();
-							tokenizer.nextToken();
-							tokenizer.nextToken();
-							String length = tokenizer.nextToken();
+							String message = tokens[2];
+							String length = tokens[4];
 							length = length.substring(1);
 							int max = Integer.parseInt(length);
 							System.out.println(message.substring(0, 29));
