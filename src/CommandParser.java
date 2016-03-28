@@ -23,7 +23,7 @@ public class CommandParser {
 				return null;
 			}
 			String token = command.substring(p+1, i);
-			p = i+1;
+			p = i+2;
 			return token;
 		}
 		else
@@ -62,7 +62,7 @@ public class CommandParser {
 		return (String[])tokens.toArray(new String[tokens.size()]);
 	}
 	public static void main(String[] args) {
-		String command = "Dette er en \"meget lang test\" 22 \"Trolololo\"";
+		String command = "Dette er en \"meget lang test\" 22 \"Trolololo\" \"Mehmeh\"";
 		System.out.println(command);
 		CommandParser p = new CommandParser(command);
 		for (String string : p.getTokens()) {
