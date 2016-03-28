@@ -1,9 +1,4 @@
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -65,9 +60,7 @@ public class WeightServer {
 							String input = sc.nextLine();
 							connection.SendMessage("RM20 A " + input.substring(0, max-1) + "\r\n");
 							sc.close();
-							
-							
-							
+								
 							break;
 					}
 					break;
@@ -155,8 +148,7 @@ public class WeightServer {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}		
 	}
 	public static void main(String[] args) throws IOException{
 		int port = defaultPort;
@@ -175,8 +167,7 @@ public class WeightServer {
 		{
 			WeightServer ws = new WeightServer();
 			ws.start(port);
-		}
-		
+		}		
 	}
 	public void printmenu(){
 		for (int i=0;i<2;i++)
