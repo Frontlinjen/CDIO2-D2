@@ -105,9 +105,14 @@ public class WeightServer {
 				}
 				case "B": //Set bruttovægt
 				{
+					if (tokens.length < 1){
+						System.out.println("Fejl, tokens bør være mindst 1");
+					}
+					else{
 					data.setBrutto(Double.parseDouble(tokens[1]));
 					printmenu();
 					connection.SendMessage("DB"+"\r\n");
+					}
 					break;
 				}
 				case "Q": //Aflsut program
@@ -133,6 +138,9 @@ public class WeightServer {
 		}
 		catch (Exception e){
 			System.out.println("Exception: "+e.getMessage());
+		}
+		finally{
+			disconnect();
 		}
 	}
 	private void disconnect()
