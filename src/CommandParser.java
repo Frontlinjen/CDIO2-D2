@@ -4,7 +4,6 @@ import java.util.List;
 public class CommandParser {
 	private String command;
 	private int p = 0;
-	private boolean end = false;
 	public CommandParser(String s)
 	{
 		command = s;
