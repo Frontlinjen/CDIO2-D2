@@ -42,6 +42,9 @@ public class WeightServer {
 				{
 					switch(tokens[1]){
 						case "8": 
+							if(tokens.length < 4){
+								throw new Exception("Not enough tokens in array to complete function");
+							}
 							String command = "";
 							for(int i = 2; i < tokens.length; i++){
 								command += " " + tokens[i];
@@ -55,7 +58,13 @@ public class WeightServer {
 							tokenizer.nextToken();
 							String length = tokenizer.nextToken();
 							length = length.substring(1);
-							int max = Integer.parseInt(length);
+							int max = 0;
+							try{
+								Integer.parseInt(length);
+							}
+							catch(Exception e){
+								throw new Exception("Ingen brutto angivet");
+							}
 							System.out.println(message.substring(0, 29));
 							connection.SendMessage("RM20 B \r\n");
 							Scanner sc = new Scanner(System.in);
