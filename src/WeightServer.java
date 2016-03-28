@@ -51,17 +51,19 @@ public class WeightServer {
 							catch(Exception e){
 								throw new Exception("Ingen brutto angivet");
 							}
-							System.out.println(message.substring(0, 29));
+							if(message.length() >= 30){
+								System.out.println(message.substring(0, 29));
+							}
+							else System.out.println(message);
 							connection.SendMessage("RM20 B \r\n");
 							Scanner sc = new Scanner(System.in);
 							String input = sc.nextLine();
 							connection.SendMessage("RM20 A " + input.substring(0, max-1) + "\r\n");
 							sc.close();
-								
 							break;
+						}
 					}
 					break;
-				}
 				case "D": //Udskriv til display
 				{
 					indtDisp = "";
