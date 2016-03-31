@@ -82,20 +82,20 @@ public class WeightServer {
 					connection.SendMessage("DW A\r\n");
 					break;
 				}
-				case "T": //Tarer v�gten
+				case "T": //Tarer weight
 				{
 					data.setTara(data.getBrutto());
 					connection.SendMessage("T S " + (data.getTara()) + " kg "+"\r\n");
 					printmenu();
 					break;
 				}
-				case "S": //Afvej
+				case "S": //Deweight
 				{
 					printmenu();
 					connection.SendMessage("S S " + (data.getNetto())+ " kg "  +"\r\n");
 					break;
 				}
-				case "B": //Set bruttov�gt
+				case "B": //Set brutto weight
 				{
 					if (tokens.length < 1){
 						System.out.println("Fejl, tokens b�r v�re mindst 1");
@@ -132,7 +132,7 @@ public class WeightServer {
 				System.out.println(String.join(",", tokens));
 			}
 			catch (Exception e){
-				System.out.println("Exception: "+e.getMessage());
+				connection.SendMessage("ES " + e.getMessage());;
 			}
 		}
 	}
@@ -146,7 +146,6 @@ public class WeightServer {
 			connection.close();
 			System.exit(0);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 	}
