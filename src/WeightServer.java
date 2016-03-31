@@ -9,14 +9,14 @@ public class WeightServer {
 	private WeightData data = new WeightData();
 	private ConnectionHandler connection;
 	static final int defaultPort = 8000;
-	
+	static boolean rm20flag = false;
 	private void connect(int port) throws IOException
 	{
 		connection = new ConnectionHandler(port);
 		System.out.println("Venter paa connection p� port " + port );
 		System.out.println("Indtast eventuel portnummer som 1. argument");
 		System.out.println("paa kommando linien for andet portnr");
-		
+
 	}
 	public void start()
 	{
@@ -32,39 +32,38 @@ public class WeightServer {
 			e1.printStackTrace();
 		}
 		printmenu();
-		try{
-			String[] tokens = null;
-			while ((tokens = connection.getCommand())!=null){ //her ventes p� input
+		String[] tokens = null;
+		while ((tokens = connection.getCommand())!=null){ //her ventes p� input
+			try{
 				switch(tokens[0])
 				{
 				case "RM20": //Skriv i display, afvent indtastning
 				{
 					switch(tokens[1]){
-						case "8": 
-							String message = tokens[2];
-							String length = tokens[4];
-							length = length.substring(1);
-							int max = 0;
-							try{
-								max = Integer.parseInt(length);
-							}
-							catch(Exception e){
-								throw new Exception("Ingen brutto angivet");
-							}
-							if(message.length() >= 30){
-								System.out.println(message.substring(0, 29));
-							}
-							else 
-								System.out.println(message);
-							connection.SendMessage("RM20 B");
-							Scanner sc = new Scanner(System.in);
-							String input = sc.nextLine();
-							connection.SendMessage("RM20 A " + input.substring(0, max-1));
-							sc.close();
-							break;
+					case "8": 
+						String message = tokens[2];
+						String length = tokens[4];
+						length = length.substring(1);
+						int max = 0;
+						try{
+							Integer.parseInt(length);
+						} 
+						catch(Exception e){
+							throw new Exception("Ingen brutto angivet");
 						}
+						if(message.length() >= 30){
+							System.out.println(message.substring(0, 29));
+						}
+						else System.out.println(message);
+						connection.SendMessage("RM20 B \r\n");
+						Scanner sc = new Scanner(System.in);
+						String input = sc.nextLine();
+						connection.SendMessage("RM20 A " + input.substring(0, max-1) + "\r\n");
+						sc.close();
+						break;
 					}
-					break;
+				}
+				break;
 				case "D": //Udskriv til display
 				{
 					indtDisp = "";
@@ -74,26 +73,26 @@ public class WeightServer {
 					if(indtSecDisp.length() > 6)
 						indtDisp = indtDisp.substring(0, 6);
 					printmenu();
-					connection.SendMessage("D A");
+					connection.SendMessage("D A"+"\r\n");
 					break;
 				}
 				case "DW": //Reset Display
 				{
 					indtDisp=data.getNetto()+ "kg";
-					connection.SendMessage("DW A");
+					connection.SendMessage("DW A\r\n");
 					break;
 				}
 				case "T": //Tarer v�gten
 				{
 					data.setTara(data.getBrutto());
-					connection.SendMessage("T S " + (data.getTara()) + " kg ");
+					connection.SendMessage("T S " + (data.getTara()) + " kg "+"\r\n");
 					printmenu();
 					break;
 				}
 				case "S": //Afvej
 				{
 					printmenu();
-					connection.SendMessage("S S " + (data.getNetto())+ " kg ");
+					connection.SendMessage("S S " + (data.getNetto())+ " kg "  +"\r\n");
 					break;
 				}
 				case "B": //Set bruttov�gt
@@ -102,13 +101,13 @@ public class WeightServer {
 						System.out.println("Fejl, tokens b�r v�re mindst 1");
 					}
 					else{
-					try{
-						data.setBrutto(Double.parseDouble(tokens[1]));
-					} catch(Exception e){
-						throw new Exception("Ingen brutto angivet");
-					}
-					printmenu();
-					connection.SendMessage("DB");
+						try{
+							data.setBrutto(Double.parseDouble(tokens[1]));
+						} catch(Exception e){
+							throw new Exception("Ingen brutto angivet");
+						}
+						printmenu();
+						connection.SendMessage("DB"+"\r\n");
 					}
 					break;
 				}
@@ -116,7 +115,7 @@ public class WeightServer {
 				{
 					disconnect();
 				}
-				
+
 				case "P111": //Udskriv til sekund�rt display
 				{
 					indtSecDisp = "";
@@ -126,18 +125,15 @@ public class WeightServer {
 					if(indtSecDisp.length() > 29)
 						indtSecDisp = indtSecDisp.substring(0, 29);
 					printmenu();
-					connection.SendMessage("D A");
+					connection.SendMessage("D A"+"\r\n");
 					break;
 				}
-			}
+				}
 				System.out.println(String.join(",", tokens));
 			}
-		}
-		catch (Exception e){
-			System.out.println("Exception: "+e.getMessage());
-		}
-		finally{
-			disconnect();
+			catch (Exception e){
+				System.out.println("Exception: "+e.getMessage());
+			}
 		}
 	}
 	private void disconnect()
@@ -175,7 +171,7 @@ public class WeightServer {
 	}
 	public void printmenu(){
 		for (int i=0;i<2;i++)
-		System.out.println("                                                 ");
+			System.out.println("                                                 ");
 		System.out.println("*************************************************");
 		System.out.println("Netto: " + (data.getNetto())+ " kg"                   );
 		System.out.println("Instruktionsdisplay: " +  indtDisp    );
