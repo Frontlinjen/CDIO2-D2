@@ -53,7 +53,7 @@ public class ConnectionHandler {
 	public void SendMessage(String s)
 	{
 		try {
-			outstream.writeBytes(s);
+			outstream.writeBytes(s+"\r\n");
 		} catch (IOException e) {
 			System.out.println("Error: A problem occurred when printing to display");
 			e.printStackTrace();

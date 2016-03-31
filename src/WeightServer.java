@@ -7,7 +7,7 @@ public class WeightServer {
 	private WeightData data = new WeightData();
 	private ConnectionHandler connection;
 	static final int defaultPort = 8000;
-	static boolean rm20flag = false;
+	
 	private void connect(int port) throws IOException
 	{
 		connection = new ConnectionHandler(port);
@@ -43,11 +43,15 @@ public class WeightServer {
 							String length = tokens[4];
 							length = length.substring(1);
 							int max = Integer.parseInt(length);
-							System.out.println(message.substring(0, 29));
-							connection.SendMessage("RM20 B \r\n");
+							if(message.length()>30)
+							{
+								message = message.substring(0, 29);
+							}
+							System.out.println(message);
+							connection.SendMessage("RM20 B");
 							Scanner sc = new Scanner(System.in);
 							String input = sc.nextLine();
-							connection.SendMessage("RM20 A " + input.substring(0, max-1) + "\r\n");
+							connection.SendMessage("RM20 A " + input.substring(0, max-1));
 							sc.close();
 								
 							break;
@@ -63,26 +67,26 @@ public class WeightServer {
 					if(indtSecDisp.length() > 6)
 						indtDisp = indtDisp.substring(0, 6);
 					printmenu();
-					connection.SendMessage("D A"+"\r\n");
+					connection.SendMessage("D A");
 					break;
 				}
 				case "DW": //Reset Display
 				{
 					indtDisp=data.getNetto()+ "kg";
-					connection.SendMessage("DW A\r\n");
+					connection.SendMessage("DW A");
 					break;
 				}
 				case "T": //Tarer v�gten
 				{
 					data.setTara(data.getBrutto());
-					connection.SendMessage("T S " + (data.getTara()) + " kg "+"\r\n");
+					connection.SendMessage("T S " + (data.getTara()) + " kg ");
 					printmenu();
 					break;
 				}
 				case "S": //Afvej
 				{
 					printmenu();
-					connection.SendMessage("S S " + (data.getNetto())+ " kg "  +"\r\n");
+					connection.SendMessage("S S " + (data.getNetto())+ " kg ");
 					break;
 				}
 				case "B": //Set bruttov�gt
@@ -93,7 +97,7 @@ public class WeightServer {
 					else{
 					data.setBrutto(Double.parseDouble(tokens[1]));
 					printmenu();
-					connection.SendMessage("DB"+"\r\n");
+					connection.SendMessage("DB");
 					}
 					break;
 				}
@@ -111,7 +115,7 @@ public class WeightServer {
 					if(indtSecDisp.length() > 29)
 						indtSecDisp = indtSecDisp.substring(0, 29);
 					printmenu();
-					connection.SendMessage("D A"+"\r\n");
+					connection.SendMessage("D A");
 					break;
 				}
 			}
