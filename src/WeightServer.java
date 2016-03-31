@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class WeightServer {
@@ -42,22 +44,27 @@ public class WeightServer {
 							String message = tokens[2];
 							String length = tokens[4];
 							length = length.substring(1);
-							int max = Integer.parseInt(length);
-							if(message.length()>30)
-							{
-								message = message.substring(0, 29);
+							int max = 0;
+							try{
+								max = Integer.parseInt(length);
 							}
-							System.out.println(message);
+							catch(Exception e){
+								throw new Exception("Ingen brutto angivet");
+							}
+							if(message.length() >= 30){
+								System.out.println(message.substring(0, 29));
+							}
+							else 
+								System.out.println(message);
 							connection.SendMessage("RM20 B");
 							Scanner sc = new Scanner(System.in);
 							String input = sc.nextLine();
 							connection.SendMessage("RM20 A " + input.substring(0, max-1));
 							sc.close();
-								
 							break;
+						}
 					}
 					break;
-				}
 				case "D": //Udskriv til display
 				{
 					indtDisp = "";
@@ -95,13 +102,17 @@ public class WeightServer {
 						System.out.println("Fejl, tokens b�r v�re mindst 1");
 					}
 					else{
-					data.setBrutto(Double.parseDouble(tokens[1]));
+					try{
+						data.setBrutto(Double.parseDouble(tokens[1]));
+					} catch(Exception e){
+						throw new Exception("Ingen brutto angivet");
+					}
 					printmenu();
 					connection.SendMessage("DB");
 					}
 					break;
 				}
-				case "Q": //Aflsut program
+				case "Q": //Afslut program
 				{
 					disconnect();
 				}
