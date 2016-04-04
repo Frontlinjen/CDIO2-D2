@@ -73,7 +73,7 @@ public class WeightServer {
 					if(indtSecDisp.length() > 6)
 						indtDisp = indtDisp.substring(0, 6);
 					printmenu();
-					connection.SendMessage("D A"+"\r\n");
+					connection.SendMessage("D A");
 					break;
 				}
 				case "DW": //Reset Display
@@ -85,14 +85,14 @@ public class WeightServer {
 				case "T": //Tarer weight
 				{
 					data.setTara(data.getBrutto());
-					connection.SendMessage("T S " + (data.getTara()) + " kg "+"\r\n");
+					connection.SendMessage("T S " + (data.getTara()) + " kg ");
 					printmenu();
 					break;
 				}
 				case "S": //Deweight
 				{
 					printmenu();
-					connection.SendMessage("S S " + (data.getNetto())+ " kg "  +"\r\n");
+					connection.SendMessage("S S " + (data.getNetto())+ " kg ");
 					break;
 				}
 				case "B": //Set brutto weight
@@ -114,6 +114,7 @@ public class WeightServer {
 				case "Q": //Afslut program
 				{
 					disconnect();
+					break;
 				}
 
 				case "P111": //Udskriv til sekund�rt display
@@ -125,14 +126,18 @@ public class WeightServer {
 					if(indtSecDisp.length() > 29)
 						indtSecDisp = indtSecDisp.substring(0, 29);
 					printmenu();
-					connection.SendMessage("D A"+"\r\n");
+					connection.SendMessage("D A");
 					break;
+				}
+				default:
+				{
+					connection.SendError("Unknown command");
 				}
 				}
 				System.out.println(String.join(",", tokens));
 			}
 			catch (Exception e){
-				connection.SendMessage("ES " + e.getMessage());;
+				connection.SendError(e.getMessage());
 			}
 		}
 	}

@@ -59,6 +59,10 @@ public class ConnectionHandler {
 			e.printStackTrace();
 		}
 	}
+	public void SendError(String s)
+	{
+		SendMessage("ES " + s);
+	}
 	public void close() throws IOException
 	{
 		instream.close();
