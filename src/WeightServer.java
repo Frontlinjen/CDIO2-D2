@@ -21,9 +21,9 @@ public class WeightServer {
 	private void connect(int port) throws IOException
 	{
 		connection = new ConnectionHandler(port);
-		System.out.println("Venter paa connection p� port " + port );
+		System.out.println("Venter p\u00E5 connection p\u00E5 port " + port );
 		System.out.println("Indtast eventuel portnummer som 1. argument");
-		System.out.println("paa kommando linien for andet portnr");
+		System.out.println("P\u00E5 kommando linien for andet portnr");
 
 	}
 	public void start()
@@ -106,7 +106,7 @@ public class WeightServer {
 				case "B": //Set brutto weight
 				{
 					if (tokens.length < 1){
-						System.out.println("Fejl, tokens b�r v�re mindst 1");
+						System.out.println("Fejl, tokens b\u00F8r v\u00E6re mindst 1");
 					}
 					else{
 						try{
@@ -129,7 +129,7 @@ public class WeightServer {
 				{
 					if(tokens.length<2)
 					{
-						throw new CommandFormatException("No arguments where given!");
+						throw new CommandFormatException("No arguments were given!");
 					}
 					indtSecDisp = "";
 					for(int i = 1; i < tokens.length; i++){
@@ -156,7 +156,7 @@ public class WeightServer {
 	private void disconnect()
 	{
 		System.out.println("");
-		System.out.println("Program stoppet Q modtaget paa com   port");
+		System.out.println("Program stoppet Q modtaget p\u00E5 com   port");
 		try {
 			System.in.close();
 			System.out.close();
@@ -191,21 +191,21 @@ public class WeightServer {
 		System.out.println("*************************************************");
 		System.out.println("Netto: " + (data.getNetto())+ " kg"                   );
 		System.out.println("Instruktionsdisplay: " +  indtDisp    );
-		System.out.println("Sekund�rt instruktionsdisplay: " +  indtSecDisp    );
+		System.out.println("Sekund\u00F8rt instruktionsdisplay: " +  indtSecDisp    );
 		System.out.println("*************************************************");
 		System.out.println("                                                 ");
 		System.out.println("                                                 ");
 		System.out.println("Brutto: " + (data.getBrutto())+ " kg"             );
 		System.out.println("Tara: " + (data.getTara())+ " kg"              	);
 		System.out.println("                                                 ");
-		System.out.println("Denne v�gt simulator lytter p� ordrene           ");
+		System.out.println("Denne v\u00E6gt simulator lytter p\u00E5 ordrene           ");
 		System.out.println("S, T, D 'TEST', DW, RM20 8 .... , B og Q         ");
-		System.out.println("p� kommunikationsporten.                         ");
+		System.out.println("p\u00E5 kommunikationsporten.                         ");
 		System.out.println("******")                             ;
-		System.out.println("Tast T for tara (svarende til knaptryk paa vegt)") ;
-		System.out.println("Tast B for ny brutto (svarende til at belastningen paa vegt �ndres)");
-		System.out.println("Tast Q for at afslutte program program");
-		System.out.println("Indtast (T/B/Q for knaptryk / brutto �ndring / quit)");
+		System.out.println("Tast T for tara (svarende til knaptryk p\u00E5 v\u00E6gt)") ;
+		System.out.println("Tast B for ny brutto (svarende til at belastningen p\u00E5 v\u00E6gt \u00E6ndres)");
+		System.out.println("Tast Q for at afslutte program");
+		System.out.println("Indtast (T/B/Q for knaptryk / brutto \u00E6ndring / quit)");
 		System.out.print  ("Tast her: ");
 	}
 }
