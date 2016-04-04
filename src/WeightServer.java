@@ -10,6 +10,14 @@ public class WeightServer {
 	private ConnectionHandler connection;
 	static final int defaultPort = 8000;
 	static boolean rm20flag = false;
+	private class CommandFormatException extends Exception
+	{
+		private static final long serialVersionUID = 1L;
+		CommandFormatException(String s)
+		{
+			super(s);
+		}
+	}
 	private void connect(int port) throws IOException
 	{
 		connection = new ConnectionHandler(port);
@@ -49,7 +57,7 @@ public class WeightServer {
 							Integer.parseInt(length);
 						} 
 						catch(Exception e){
-							throw new Exception("Ingen brutto angivet");
+							throw new CommandFormatException("Ingen brutto angivet");
 						}
 						if(message.length() >= 30){
 							System.out.println(message.substring(0, 29));
@@ -104,7 +112,7 @@ public class WeightServer {
 						try{
 							data.setBrutto(Double.parseDouble(tokens[1]));
 						} catch(Exception e){
-							throw new Exception("Ingen brutto angivet");
+							throw new CommandFormatException("Ingen brutto angivet");
 						}
 						printmenu();
 						connection.SendMessage("DB"+"\r\n");
@@ -119,6 +127,10 @@ public class WeightServer {
 
 				case "P111": //Udskriv til sekund�rt display
 				{
+					if(tokens.length<2)
+					{
+						throw new CommandFormatException("No arguments where given!");
+					}
 					indtSecDisp = "";
 					for(int i = 1; i < tokens.length; i++){
 						indtSecDisp += " " + tokens[i];
