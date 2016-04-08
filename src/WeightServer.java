@@ -1,10 +1,8 @@
-import java.io.Console;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class WeightServer {
 	private String indtDisp= "";
-	private String indtSecDisp = "";
 	private WeightData data = new WeightData();
 	private ConnectionHandler connection;
 	static final int defaultPort = 8000;
@@ -123,13 +121,13 @@ public class WeightServer {
 					}
 					break;
 				}
-				case "Q": //Afslut program
+				case "Q": //Afslutter programmet
 				{
 					disconnect();
 					break;
 				}
 
-				case "P111": //Udskriv til sekund�rt display
+				case "P111": //Udskriver til sekundaert display
 				{
 					if(tokens.length<2)
 					{
@@ -182,7 +180,7 @@ public class WeightServer {
 		}
 		catch(NumberFormatException e)
 		{
-			System.out.println("Specified port was not a number. Resetting to default.");
+			System.out.println("Specificerede port var ikke et nummer. Reset til default port.");
 		}
 		finally
 		{
@@ -196,7 +194,7 @@ public class WeightServer {
 		System.out.println("*************************************************");
 		System.out.println("Netto: " + (data.getNetto())+ " kg"                   );
 		System.out.println("Instruktionsdisplay: " +  indtDisp    );
-		System.out.println("Sekund\u00F8rt instruktionsdisplay: " +  indtSecDisp    );
+		System.out.println("Sekund\u00F8rt instruktionsdisplay: " +  indtDisp    );
 		System.out.println("*************************************************");
 		System.out.println("                                                 ");
 		System.out.println("                                                 ");
