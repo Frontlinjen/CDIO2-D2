@@ -63,12 +63,4 @@ public class CommandParser {
 		}
 		return (String[])tokens.toArray(new String[tokens.size()]);
 	}
-	public static void main(String[] args) {
-		String command = "Dette er en \"meget lang test\" 22 \"Trolololo\" \"Mehmeh\" B 20";
-		System.out.println(command);
-		CommandParser p = new CommandParser(command);
-		for (String string : p.getTokens()) {
-			System.out.println(string);
-		}
-	}
 }
