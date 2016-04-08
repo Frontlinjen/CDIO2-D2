@@ -21,18 +21,24 @@ public class ConnectionHandler {
 			System.out.println("Listening for command...");
 			if(!(command = instream.readLine().toUpperCase()).isEmpty())
 			{
+				System.out.println(command);
 				if(fresh)
 				{
 					//Removes initial connection bogus
-					command = command.substring(21, command.length());
+//					if(command.length()>21)
+//						command = command.substring(21, command.length());
 					fresh = false;
+					System.out.println(command);
 				}
 				CommandParser tokenizer = new CommandParser(command);
 				return tokenizer.getTokens();
 			}
 		} catch (IOException e) {
-			System.out.println("Error: A problem occurred when recieving command");
-			e.printStackTrace();
+			System.out.println("Error: A problem occurred when recieving command:" + e.getMessage());
+		}
+		catch(NullPointerException e)
+		{
+			System.out.println("Connection ended prematurely");
 		}
 		return null;
 	}
