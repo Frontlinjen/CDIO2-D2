@@ -160,7 +160,7 @@ public class WeightServer {
 			connection.close();
 			System.exit(0);
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Programmet fejlede i at lukke ned");;
 		}		
 	}
 	public static void main(String[] args) throws IOException{
