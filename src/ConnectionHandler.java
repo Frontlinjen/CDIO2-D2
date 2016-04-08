@@ -18,15 +18,15 @@ public class ConnectionHandler {
 	{
 		String command = null;
 		try {
-			System.out.println("Venter på kommando...");
+			System.out.println("Venter p\u00E5 kommando...");
 			if(!(command = instream.readLine().toUpperCase()).isEmpty())
 			{
 				System.out.println(command);
 				if(fresh)
 				{
 					//Removes initial connection bogus
-//					if(command.length()>21)
-//						command = command.substring(21, command.length());
+					if(command.length()>21)
+						command = command.substring(21, command.length());
 					fresh = false;
 					System.out.println(command);
 				}

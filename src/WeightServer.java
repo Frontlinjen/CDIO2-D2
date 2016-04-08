@@ -60,7 +60,7 @@ public class WeightServer {
 						}
 						else System.out.println(message);
 						connection.SendMessage("RM20 B");
-						System.out.println("Venter på input af længde " + max);
+						System.out.println("Venter p\u00E5 input af l\u00E6ngde " + max);
 						Scanner sc = new Scanner(System.in);
 						String input = sc.nextLine();
 						while(input.length() > max){
