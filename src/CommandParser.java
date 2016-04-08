@@ -31,7 +31,9 @@ public class CommandParser {
 			int i = command.indexOf(' ', p);
 			if(i==-1)
 			{
-				return command.substring(p, command.length());
+				String token = command.substring(p, command.length());;
+				p = command.length();
+				return token;
 			}
 			else
 			{
@@ -55,14 +57,16 @@ public class CommandParser {
 	{
 		String s;
 		List<String> tokens = new ArrayList<String>();
+		System.out.println("Getting tokens:");
 		while((s = nextToken())!=null)
 		{
+			System.out.println(s);
 			tokens.add(s);
 		}
 		return (String[])tokens.toArray(new String[tokens.size()]);
 	}
 	public static void main(String[] args) {
-		String command = "Dette er en \"meget lang test\" 22 \"Trolololo\" \"Mehmeh\"";
+		String command = "Dette er en \"meget lang test\" 22 \"Trolololo\" \"Mehmeh\" B 20";
 		System.out.println(command);
 		CommandParser p = new CommandParser(command);
 		for (String string : p.getTokens()) {
