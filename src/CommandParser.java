@@ -57,7 +57,6 @@ public class CommandParser {
 	{
 		String s;
 		List<String> tokens = new ArrayList<String>();
-		System.out.println("Getting tokens:");
 		while((s = nextToken())!=null)
 		{
 			tokens.add(s);
