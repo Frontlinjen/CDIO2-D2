@@ -67,7 +67,7 @@ public class WeightServer {
 							System.out.println("Inputtet er for langt, det må maks være " + max + " langt.");
 							input = sc.nextLine();
 						}
-						connection.SendMessage("RM20 A " + input.substring(0, input.length()) + "\r\n");
+						connection.SendMessage("RM20 A " + input.substring(0, input.length()));
 						sc.close();
 						break;
 					}
@@ -89,7 +89,7 @@ public class WeightServer {
 				case "DW": //Reset Display
 				{
 					indtDisp=data.getNetto()+ "kg";
-					connection.SendMessage("DW A\r\n");
+					connection.SendMessage("DW A");
 					break;
 				}
 				case "T": //Tarer weight
@@ -117,7 +117,7 @@ public class WeightServer {
 							throw new CommandFormatException("Ingen brutto angivet");
 						}
 						printmenu();
-						connection.SendMessage("DB"+"\r\n");
+						connection.SendMessage("DB");
 					}
 					break;
 				}
