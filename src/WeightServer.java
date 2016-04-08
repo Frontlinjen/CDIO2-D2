@@ -149,7 +149,6 @@ public class WeightServer {
 					connection.SendError("Unknown command");
 				}
 				}
-				System.out.println(String.join(",", tokens));
 			}
 			catch (Exception e){
 				connection.SendError(e.getMessage());
@@ -166,7 +165,7 @@ public class WeightServer {
 			connection.close();
 			System.exit(0);
 		} catch (IOException e) {
-			System.out.println("Programmet fejlede i at lukke ned");;
+			System.out.println("Programmet fejlede i at lukke ned ordenligt");;
 		}		
 	}
 	public static void main(String[] args) throws IOException{

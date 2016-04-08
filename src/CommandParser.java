@@ -60,7 +60,6 @@ public class CommandParser {
 		System.out.println("Getting tokens:");
 		while((s = nextToken())!=null)
 		{
-			System.out.println(s);
 			tokens.add(s);
 		}
 		return (String[])tokens.toArray(new String[tokens.size()]);
