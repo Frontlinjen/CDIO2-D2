@@ -1,3 +1,4 @@
+import java.io.Console;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -67,8 +68,9 @@ public class WeightServer {
 						sc.close();
 						break;
 					}
+					break;
 				}
-				break;
+				
 				case "D": //Udskriv til display
 				{
 					indtDisp = "";
@@ -103,7 +105,7 @@ public class WeightServer {
 				case "B": //Set brutto weight
 				{
 					if (tokens.length < 1){
-						System.out.println("Fejl, tokens b\u00F8r v\u00E6re mindst 1");
+						connection.SendError("Fejl, tokens b\u00F8r v\u00E6re mindst 1");
 					}
 					else{
 						try{
