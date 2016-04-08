@@ -61,10 +61,15 @@ public class WeightServer {
 							System.out.println(message.substring(0, 29));
 						}
 						else System.out.println(message);
-						connection.SendMessage("RM20 B \r\n");
+						connection.SendMessage("RM20 B");
+						System.out.println("Waiting for input of length " + max);
 						Scanner sc = new Scanner(System.in);
 						String input = sc.nextLine();
-						connection.SendMessage("RM20 A " + input.substring(0, max-1) + "\r\n");
+						while(input.length() > max){
+							System.out.println("Inputtet er for langt, det må maks være " + max + " langt.");
+							input = sc.nextLine();
+						}
+						connection.SendMessage("RM20 A " + input.substring(0, input.length()) + "\r\n");
 						sc.close();
 						break;
 					}
