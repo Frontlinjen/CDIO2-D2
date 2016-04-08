@@ -24,7 +24,6 @@ public class WeightServer {
 		System.out.println("Venter p\u00E5 connection p\u00E5 port " + port );
 		System.out.println("Indtast eventuel portnummer som 1. argument");
 		System.out.println("P\u00E5 kommando linien for andet portnr");
-
 	}
 	public void start()
 	{
@@ -36,8 +35,8 @@ public class WeightServer {
 			connect(port);
 			System.out.println("Successfully connected");
 		} catch (IOException e1) {
-			System.out.println("Error: A problem occurred while waiting for a connection on port: " + port);
-			e1.printStackTrace();
+			System.out.println("Error: A problem occurred while waiting for a connection on port " + port + ":\t" + e1.getMessage());
+			return;
 		}
 		printmenu();
 		String[] tokens = null;

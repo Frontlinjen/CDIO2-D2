@@ -36,19 +36,14 @@ public class ConnectionHandler {
 		}
 		return null;
 	}
-	public ConnectionHandler(int port)
+	public ConnectionHandler(int port) throws IOException
 	{
-		try {
 			listener = new ServerSocket(port);
 			sock = listener.accept();
 			instream = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 			outstream = new DataOutputStream(sock.getOutputStream());
 			
 			System.out.println("Skipping...");
-		} catch (IOException e) {
-			System.out.println("Error: A problem occurred when connecting to server");
-			e.printStackTrace();
-		}
 	}
 	public void SendMessage(String s)
 	{
