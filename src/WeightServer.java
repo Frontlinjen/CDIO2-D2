@@ -1,6 +1,4 @@
 import java.io.IOException;
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.Scanner;
 
 public class WeightServer {
@@ -77,7 +75,7 @@ public class WeightServer {
 					for(int i = 1; i < tokens.length; i++){
 						indtDisp += " " + tokens[i];
 					}
-					if(indtSecDisp.length() > 6)
+					if(indtDisp.length() > 6)
 						indtDisp = indtDisp.substring(0, 6);
 					printmenu();
 					connection.SendMessage("D A");
@@ -130,12 +128,12 @@ public class WeightServer {
 					{
 						throw new CommandFormatException("No arguments were given!");
 					}
-					indtSecDisp = "";
+					indtDisp = "";
 					for(int i = 1; i < tokens.length; i++){
-						indtSecDisp += " " + tokens[i];
+						indtDisp += " " + tokens[i];
 					}
-					if(indtSecDisp.length() > 29)
-						indtSecDisp = indtSecDisp.substring(0, 29);
+					if(indtDisp.length() > 29)
+						indtDisp = indtDisp.substring(0, 29);
 					printmenu();
 					connection.SendMessage("D A");
 					break;
