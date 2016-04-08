@@ -52,10 +52,10 @@ public class WeightServer {
 						length = length.substring(1);
 						int max = 0;
 						try{
-							Integer.parseInt(length);
+							max = Integer.parseInt(length);
 						} 
 						catch(Exception e){
-							throw new CommandFormatException("Ingen brutto angivet");
+							throw new CommandFormatException("Ingen input længde givet");
 						}
 						if(message.length() >= 30){
 							System.out.println(message.substring(0, 29));
