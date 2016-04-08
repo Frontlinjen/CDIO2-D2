@@ -82,8 +82,8 @@ public class WeightServer {
 					for(int i = 1; i < tokens.length; i++){
 						indtDisp += " " + tokens[i];
 					}
-					if(indtDisp.length() > 6)
-						indtDisp = indtDisp.substring(0, 6);
+					if(indtDisp.length() > 8)
+						indtDisp = indtDisp.substring(0, 8);
 					printmenu();
 					connection.SendMessage("D A");
 					break;
@@ -139,10 +139,11 @@ public class WeightServer {
 					for(int i = 1; i < tokens.length; i++){
 						indtDisp += " " + tokens[i];
 					}
-					if(indtDisp.length() > 29)
-						indtDisp = indtDisp.substring(0, 29);
+					if(indtDisp.length() > 31){
+						indtDisp = indtDisp.substring(0, 31);
+					}
 					printmenu();
-					connection.SendMessage("D A");
+					connection.SendMessage("P111 A");
 					break;
 				}
 				default:
