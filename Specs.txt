@@ -1,5 +1,5 @@
 Programmet kræver:
 Java 1.7 eller nyere
-10mB ram
+15mB ram
 Supporteret TCP/protocol
 Telnet klient
