@@ -32,7 +32,7 @@ public class WeightServer {
 			connect(port);
 			System.out.println("Successfully connected");
 		} catch (IOException e1) {
-			System.out.println("Error: A problem occurred while waiting for a connection on port " + port + ":\t" + e1.getMessage());
+			System.out.println("Fejl: Et problem opstod under forbindelse til port " + port + ":\t" + e1.getMessage());
 			return;
 		}
 		printmenu();
@@ -53,18 +53,18 @@ public class WeightServer {
 							max = Integer.parseInt(length);
 						} 
 						catch(Exception e){
-							throw new CommandFormatException("Ingen input længde givet");
+							throw new CommandFormatException("Ingen input l\u00E6ngde givet");
 						}
 						if(message.length() >= 30){
 							System.out.println(message.substring(0, 29));
 						}
 						else System.out.println(message);
 						connection.SendMessage("RM20 B");
-						System.out.println("Waiting for input of length " + max);
+						System.out.println("Venter pÃ¥ input af lÃ¦ngde " + max);
 						Scanner sc = new Scanner(System.in);
 						String input = sc.nextLine();
 						while(input.length() > max){
-							System.out.println("Inputtet er for langt, det må maks være " + max + " langt.");
+							System.out.println("Inputtet er for langt, det m\u00E5 maks v\u00E6re " + max + " langt.");
 							input = sc.nextLine();
 						}
 						connection.SendMessage("RM20 A " + input.substring(0, input.length()));
@@ -132,7 +132,7 @@ public class WeightServer {
 				{
 					if(tokens.length<2)
 					{
-						throw new CommandFormatException("No arguments were given!");
+						throw new CommandFormatException("Ikke argumenter givet!");
 					}
 					indtDisp = "";
 					for(int i = 1; i < tokens.length; i++){
@@ -147,7 +147,7 @@ public class WeightServer {
 				}
 				default:
 				{
-					connection.SendError("Unknown command");
+					connection.SendError("Ukendt kommando");
 				}
 				}
 			}

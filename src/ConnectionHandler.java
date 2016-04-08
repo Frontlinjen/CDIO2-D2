@@ -18,7 +18,7 @@ public class ConnectionHandler {
 	{
 		String command = null;
 		try {
-			System.out.println("Listening for command...");
+			System.out.println("Venter på kommando...");
 			if(!(command = instream.readLine().toUpperCase()).isEmpty())
 			{
 				System.out.println(command);
@@ -34,11 +34,11 @@ public class ConnectionHandler {
 				return tokenizer.getTokens();
 			}
 		} catch (IOException e) {
-			System.out.println("Error: A problem occurred when recieving command:" + e.getMessage());
+			System.out.println("Fejl: Et problem opstod under modtagelse af kommando:" + e.getMessage());
 		}
 		catch(NullPointerException e)
 		{
-			System.out.println("Connection ended prematurely");
+			System.out.println("Forbindelse tabt for tidligt");
 		}
 		return null;
 	}
@@ -56,7 +56,7 @@ public class ConnectionHandler {
 		try {
 			outstream.writeBytes(s+"\r\n");
 		} catch (IOException e) {
-			System.out.println("Error: A problem occurred when printing to display");
+			System.out.println("Fejl: Et problem opstod da der blev printet til display");
 			e.printStackTrace();
 		}
 	}
