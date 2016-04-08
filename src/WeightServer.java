@@ -90,6 +90,7 @@ public class WeightServer {
 				{
 					indtDisp=data.getNetto()+ "kg";
 					connection.SendMessage("DW A");
+					printmenu();
 					break;
 				}
 				case "T": //Tarer weight
