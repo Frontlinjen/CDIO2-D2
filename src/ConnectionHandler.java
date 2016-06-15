@@ -25,8 +25,8 @@ public class ConnectionHandler {
 				if(fresh)
 				{
 					//Removes initial connection bogus
-					if(command.length()>21)
-						command = command.substring(21, command.length());
+//					if(command.length()>21)
+//						command = command.substring(21, command.length());
 					fresh = false;
 					System.out.println(command);
 				}
@@ -48,7 +48,7 @@ public class ConnectionHandler {
 			sock = listener.accept();
 			instream = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 			outstream = new DataOutputStream(sock.getOutputStream());
-			
+			SendMessage("WeightSimulator 1.2");
 			System.out.println("Skipping...");
 	}
 	public void SendMessage(String s)

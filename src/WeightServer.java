@@ -37,6 +37,7 @@ public class WeightServer {
 		}
 		printmenu();
 		String[] tokens = null;
+		Scanner sc = new Scanner(System.in);
 		while ((tokens = connection.getCommand())!=null){ //her ventes p� input
 			try{
 				switch(tokens[0])
@@ -46,29 +47,29 @@ public class WeightServer {
 					switch(tokens[1]){
 					case "8": 
 						String message = tokens[2];
-						String length = tokens[4];
-						length = length.substring(1);
-						int max = 0;
-						try{
-							max = Integer.parseInt(length);
-						} 
-						catch(Exception e){
-							throw new CommandFormatException("Ingen input l\u00E6ngde givet");
-						}
+						String unit = tokens[4];
 						if(message.length() >= 30){
 							System.out.println(message.substring(0, 29));
 						}
 						else System.out.println(message);
 						connection.SendMessage("RM20 B");
-						System.out.println("Venter p\u00E5 input af l\u00E6ngde " + max);
-						Scanner sc = new Scanner(System.in);
-						String input = sc.nextLine();
-						while(input.length() > max){
-							System.out.println("Inputtet er for langt, det m\u00E5 maks v\u00E6re " + max + " langt.");
+						String input = null;
+						while(sc.hasNextLine())
+						{
 							input = sc.nextLine();
+							CommandParser command = new CommandParser(input);
+							if(command.nextToken().equals("B"))
+							{
+								data.setBrutto(Double.parseDouble(command.nextToken()));
+								System.out.println("Successfully updated weight");
+							}
+							else
+							{
+								break;
+							}							
 						}
+						
 						connection.SendMessage("RM20 A " + input.substring(0, input.length()));
-						sc.close();
 						break;
 					}
 					break;
@@ -153,8 +154,10 @@ public class WeightServer {
 			}
 			catch (Exception e){
 				connection.SendError(e.getMessage());
+				e.printStackTrace();
 			}
 		}
+		sc.close();
 	}
 	private void disconnect()
 	{
